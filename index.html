@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Valentijn voor jou 💘</title>
+
+<!-- Kalligrafie lettertype -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #ff7aa2, #ff3b6b);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        overflow: hidden;
+    }
+
+    /* Hartjes animatie */
+    .heart {
+        position: fixed;
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.9);
+        transform: rotate(45deg);
+        animation: floatUp 10s linear infinite;
+        opacity: 0.7;
+    }
+    .heart::before, .heart::after {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.9);
+        border-radius: 50%;
+    }
+    .heart::before { top: -9px; left: 0; }
+    .heart::after { left: -9px; top: 0; }
+
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+        20% { opacity: 0.8; }
+        100% { transform: translateY(-20vh) rotate(45deg); opacity: 0; }
+    }
+
+    .card {
+        background: rgba(0,0,0,0.35);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        width: 380px;
+        animation: popIn 0.8s ease-out;
+    }
+
+    @keyframes popIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Typewriter tekst */
+    #typewriter {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        min-height: 120px;
+        white-space: pre-line;
+        margin-bottom: 25px;
+        font-family: "Dancing Script", cursive; /* Kalligrafie */
+    }
+
+    /* Vraagbox */
+    #questionBox {
+        opacity: 0;
+        transition: opacity 1s ease;
+        margin-top: 10px;
+    }
+
+    button {
+        margin: 10px;
+        padding: 12px 20px;
+        border-radius: 30px;
+        border: none;
+        background: white;
+        color: #ff3b6b;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        background: #ffe6ee;
+    }
+
+    #message {
+        margin-top: 20px;
+        font-size: 1rem;
+        min-height: 40px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Hartjes -->
+<div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+<div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+<div class="heart" style="left: 55%; animation-delay: 4s;"></div>
+<div class="heart" style="left: 75%; animation-delay: 1s;"></div>
+<div class="heart" style="left: 90%; animation-delay: 3s;"></div>
+
+<div class="card">
+
+    <!-- TYPEWRITER TEKST -->
+    <div id="typewriter"></div>
+
+    <!-- VRAAGBOX -->
+    <div id="questionBox">
+        <h2>Do you have a Valentine already or do you wanna be mine? 💘</h2>
+        <button onclick="sayYes()">Ja</button>
+        <button onclick="sayNo()">Nee</button>
+        <div id="message"></div>
+    </div>
+
+</div>
+
+<script>
+    const text = "Hiiiii meneer Ramsodit, even een random berichtje om te zeggen dat ik je echt heel cute vind 🫶 en dat ik je waardeer voor alles wat je doet.";
+    let i = 0;
+
+    function typeWriter() {
+        if (i < text.length) {
+            document.getElementById("typewriter").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 80); // Langzamer typen
+        } else {
+            document.getElementById("questionBox").style.opacity = 1;
+        }
+    }
+
+    window.onload = typeWriter;
+
+    const playfulNo = [
+        "Oeps… verkeerde knop 😉 probeer opnieuw!",
+        "Haha... nee bestaat niet vandaag, nog een keer!",
+        "Auw… mijn hart! Probeer het nog eens 😌",
+        "Je klikt vast mis, probeer opnieuw! 💕",
+        "Nee? Dat kan niet… probeer nog eens! 😏"
+    ];
+
+    function sayYes() {
+        document.getElementById("message").innerHTML =
+            "💖 Awwww… dat maakt me echt blij. Jij bent mijn favoriete persoon! 💖";
+    }
+
+    function sayNo() {
+        const msg = playfulNo[Math.floor(Math.random() * playfulNo.length)];
+        document.getElementById("message").innerHTML = msg;
+    }
+</script>
+
+</body>
+</html>
